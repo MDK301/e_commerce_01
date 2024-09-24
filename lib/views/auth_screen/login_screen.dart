@@ -9,21 +9,19 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return bgWidget(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              (context.screenHeight * 0.1).heightBox,
-              applogoWidget(),
-              10.heightBox,
-              "Login to $appname".text.fontFamily(bold).white.size(18).make(),
-              10.heightBox,
-              Column(
-                children: [customTextField()],
-              ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth - 70 ).make()
-            ],
-          ),
+    return BgWidget(
+      child: SafeArea(
+        child: Column(
+          children: [
+            (context.screenHeight * 0.1).heightBox,
+            applogoWidget(),
+            10.heightBox,
+            "Login to $appname".text.fontFamily(bold).white.size(18).make(),
+            10.heightBox,
+            Column(
+              children: [customTextField()],
+            ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth - 70 ).make()
+          ],
         ),
       ),
     );
