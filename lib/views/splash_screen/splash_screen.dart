@@ -3,8 +3,6 @@ import 'package:e_commerce/views/auth_screen/login_screen.dart';
 import 'package:e_commerce/widgets_common/applogo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
