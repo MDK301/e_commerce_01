@@ -21,7 +21,7 @@ class SignupScreen extends StatelessWidget {
               (context.screenHeight * 0.1).heightBox,
               applogoWidget(),
               10.heightBox,
-              "Login to $appname".text.fontFamily(bold).white.size(18).make(),
+              "Sign up to $appname".text.fontFamily(bold).white.size(18).make(),
               15.heightBox,
               Column(
                 children: [
