@@ -5,9 +5,10 @@ import 'package:e_commerce/widgets_common/bg_widget.dart';
 import 'package:e_commerce/widgets_common/custom_textfield.dart';
 import 'package:e_commerce/widgets_common/our_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class LoginScreen extends StatelessWidget {
                     color: lightGrey,
                     textColor: redColor,
                     title: signup,
-                    onPress: () {},
+                    onPress: () {
+                      Get.to(()=>const SignupScreen());
+                    },
                   ).box.width(context.screenWidth - 50).make(),
                   5.heightBox,
                   loginWith.text.color(fontGrey).make(),
@@ -54,14 +57,14 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                         3,
-                        (index) => CircleAvatar(
-                              backgroundColor: lightGrey,
-                              radius: 25,
-                              child: Image.asset(
-                                socialIconList[index],
-                                width: 30,
-                              ),
-                            )),
+                            (index) => CircleAvatar(
+                          backgroundColor: lightGrey,
+                          radius: 25,
+                          child: Image.asset(
+                            socialIconList[index],
+                            width: 30,
+                          ),
+                        )),
                   ),
                 ],
               )

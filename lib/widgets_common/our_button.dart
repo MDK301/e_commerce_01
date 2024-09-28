@@ -4,7 +4,7 @@ import 'package:e_commerce/consts/consts.dart';
 Widget ourButton({
   color,
   textColor,
-  title,
+  String? title,
   onPress,
 }) {
   return ElevatedButton(
@@ -15,6 +15,6 @@ Widget ourButton({
     onPressed: () {
       onPress;
     },
-    child: Text(title,style: TextStyle(color: textColor,fontFamily: bold,),),
+    child: title!.text.color(textColor).fontFamily(bold).make(),
   );
 }
