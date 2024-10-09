@@ -25,13 +25,47 @@ class SignupScreen extends StatelessWidget {
               15.heightBox,
               Column(
                 children: [
+                  customTextField(hint: namehint, title: name),
                   customTextField(hint: emailhint, title: email),
                   customTextField(hint: passwordhint, title: password),
+                  customTextField(hint: passwordhint, title: retypepassword),
                   Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           onPressed: () {}, child: forgetPass.text.make())),
                   5.heightBox,
+                  Row(
+                    children: [
+                      Checkbox(
+                        checkColor: redColor,
+                        value: false,
+                        onChanged: (newValue) {},
+                      ),
+                      10.heightBox,
+                      Expanded(
+                        child: RichText(
+                            text: TextSpan(children: [
+                              TextSpan(
+                                  text: "I agree to the ",
+                                  style:
+                                  TextStyle(fontFamily: bold, color: fontGrey)),
+                              TextSpan(
+                                  text: termandcondition,
+                                  style:
+                                  TextStyle(fontFamily: bold, color: redColor)),
+                              TextSpan(
+                                  text: " & ",
+                                  style:
+                                  TextStyle(fontFamily: bold, color: fontGrey)),
+                              TextSpan(
+                                  text: privacypolicy,
+                                  style:
+                                  TextStyle(fontFamily: bold, color: redColor)),
+                        ])),
+                      ),
+                    ],
+                  ),
+                  15.heightBox,
                   // ourButton().box.width(context.screenWidth - 50).make(),
                   ourButton(
                     color: redColor,
@@ -39,40 +73,14 @@ class SignupScreen extends StatelessWidget {
                     title: login,
                     onPress: () {},
                   ).box.width(context.screenWidth - 50).make(),
-                  5.heightBox,
-                  createNewAccount.text.color(fontGrey).make(),
-                  5.heightBox,
-                  ourButton(
-                    color: lightGrey,
-                    textColor: redColor,
-                    title: signup,
-                    onPress: () {
-                      Get.to(()=>const SignupScreen());
-                    },
-                  ).box.width(context.screenWidth - 50).make(),
-                  5.heightBox,
-                  loginWith.text.color(fontGrey).make(),
-                  5.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                        3,
-                            (index) => CircleAvatar(
-                          backgroundColor: lightGrey,
-                          radius: 25,
-                          child: Image.asset(
-                            socialIconList[index],
-                            width: 30,
-                          ),
-                        )),
-                  ),
                 ],
               )
                   .box
                   .white
                   .rounded
                   .padding(const EdgeInsets.all(16))
-                  .width(context.screenWidth - 70).shadowSm
+                  .width(context.screenWidth - 70)
+                  .shadowSm
                   .make()
             ],
           ),

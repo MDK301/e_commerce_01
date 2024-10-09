@@ -13,3 +13,5 @@ const login = "Log in";
 const signup = "Sign up";
 const createNewAccount = "or, create a new account";
 const loginWith = "Log in With";
+const privacypolicy = "Privacy Policy";
+const termandcondition = "Term And Condition";
