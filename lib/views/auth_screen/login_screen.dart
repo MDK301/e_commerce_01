@@ -2,13 +2,14 @@ import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
 import 'package:e_commerce/views/auth_screen/signup_screen.dart';
 import 'package:e_commerce/views/home_screen/home.dart';
-import 'package:e_commerce/widgets_common/applogo_widget.dart';
-import 'package:e_commerce/widgets_common/bg_widget.dart';
-import 'package:e_commerce/widgets_common/custom_textfield.dart';
-import 'package:e_commerce/widgets_common/our_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
+import '../widgets_common/applogo_widget.dart';
+import '../widgets_common/bg_widget.dart';
+import '../widgets_common/custom_textfield.dart';
+import '../widgets_common/our_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

@@ -1,10 +1,10 @@
 import 'package:e_commerce/consts/colors.dart';
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
-import 'package:e_commerce/widgets_common/home_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import '../widgets_common/home_button.dart';
 import 'components/feature_button.dart';
 
 class HomeScreen extends StatelessWidget {
