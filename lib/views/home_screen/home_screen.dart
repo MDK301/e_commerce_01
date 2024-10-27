@@ -3,6 +3,9 @@ import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
 import 'package:e_commerce/widgets_common/home_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+import 'components/feature_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -126,7 +129,33 @@ class HomeScreen extends StatelessWidget {
                             .fontFamily(semibold)
                             .make()),
                     20.heightBox,
-                    Row(children: List.generate(3, (index)=>Column()).toList(),),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                            3,
+                            (index) => Column(children: [
+                                  featureButton(
+                                      title: featureTite1[index],
+                                      icon: featureList1[index]),
+                                  10.heightBox,
+                                  featureButton(
+                                      title: featureTite2[index],
+                                      icon: featureList2[index]),
+                                ])).toList(),
+                      ),
+                    ),
+
+                    //featured product
+                    Container(
+                      decoration: const  BoxDecoration(color: redColor),
+                      child: Column(
+                        children: [
+
+                        ],
+                      ),
+                    ),
+
                   ],
                 ),
               ),
