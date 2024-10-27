@@ -77,6 +77,7 @@ class HomeScreen extends StatelessWidget {
 
                     //second slider :v
                     10.heightBox,
+                    //swiper brands
                     VxSwiper.builder(
                       aspectRatio: 16 / 9,
                       autoPlay: true,
@@ -148,14 +149,120 @@ class HomeScreen extends StatelessWidget {
 
                     //featured product
                     Container(
-                      decoration: const  BoxDecoration(color: redColor),
+                      padding: const EdgeInsets.all(12),
+                      width: double.infinity,
+                      decoration: const BoxDecoration(color: redColor),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
+                          featuredproduct.text.white.fontFamily(bold).make(),
+                          10.heightBox,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: List.generate(
+                                  6,
+                                  (index) => Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            imgP1,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          10.heightBox,
+                                          "Laptop 4GB/64GB"
+                                              .text
+                                              .fontFamily(semibold)
+                                              .color(darkFontGrey)
+                                              .make(),
+                                          10.heightBox,
+                                          "\600"
+                                              .text
+                                              .color(redColor)
+                                              .fontFamily(bold)
+                                              .size(16)
+                                              .make(),
+                                        ],
+                                      )
+                                          .box
+                                          .white
+                                          .margin(const EdgeInsets.symmetric(
+                                              horizontal: 4))
+                                          .roundedSM
+                                          .padding(EdgeInsets.all(8))
+                                          .make()),
+                            ),
+                          ),
                         ],
                       ),
                     ),
 
+                    //third swiper
+                    20.heightBox,
+                    VxSwiper.builder(
+                      aspectRatio: 16 / 9,
+                      autoPlay: true,
+                      height: 150,
+                      enlargeCenterPage: true,
+                      itemCount: seccondslidersList.length,
+                      itemBuilder: (context, index) {
+                        return Image.asset(
+                          seccondslidersList[index],
+                          fit: BoxFit.fill,
+                        )
+                            .box
+                            .rounded
+                            .clip(Clip.antiAlias)
+                            .margin(EdgeInsets.symmetric(horizontal: 8))
+                            .make();
+                      },
+                    ),
+
+                    //all product section
+                    20.heightBox,
+                    GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: 6,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                      mainAxisSpacing: 8,crossAxisSpacing: 8,mainAxisExtent: 300),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              imgP1,
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
+                            const Spacer(),
+                            "Laptop 4GB/64GB"
+                                .text
+                                .fontFamily(semibold)
+                                .color(darkFontGrey)
+                                .make(),
+                            10.heightBox,
+                            "\600"
+                                .text
+                                .color(redColor)
+                                .fontFamily(bold)
+                                .size(16)
+                                .make(),
+                          ],
+                        )
+                            .box
+                            .white
+                            .margin(const EdgeInsets.symmetric(
+                            horizontal: 4))
+                            .roundedSM
+                            .padding(EdgeInsets.all(8))
+                            .make();
+                      },
+                    ),
                   ],
                 ),
               ),
