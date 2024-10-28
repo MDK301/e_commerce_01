@@ -223,6 +223,7 @@ class HomeScreen extends StatelessWidget {
                     //all product section
                     20.heightBox,
                     GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: 6,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
