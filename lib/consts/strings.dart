@@ -36,3 +36,15 @@ const boysglasses="Boys glasses";
 const tshirts="Tshirts";
 const girlsdress="Girls Dress";
 
+//categories Strings
+const womenclothing="Women Clothing";
+const menclothingfashion="Men Clothing & Fashion";
+const compaccess="Computer & Accessories";
+const automobile="Automobile";
+const kidtoys="Kids & Toys";
+const sports="Sports";
+const jewelery="Jewelery";
+const cellphone="Cellphone & Tab";
+const furniture="Funiture";
+
+
