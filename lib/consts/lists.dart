@@ -9,4 +9,4 @@ const featureTite1=[womendress,girlsdress,girlswatches];
 const featureTite2=[boysglasses,mobilephone,tshirts];
 const categorylist=[womenclothing,menclothingfashion,compaccess,automobile,kidtoys,sports,jewelery,cellphone,furniture];
 const categoryImages=[imgFc1,imgFc2,imgFc3,imgFc4,imgFc5,imgFc6,imgFc7,imgFc8,imgFc9,];
-
+const itemdetailbuttonlist=[video,review,privacypolicy,returnpolicy,supportpolicy];

@@ -47,4 +47,13 @@ const jewelery="Jewelery";
 const cellphone="Cellphone & Tab";
 const furniture="Funiture";
 
+//categories detail
+const video="Video";
+const review="Review";
+const sellerpolicy="Seller Policy";
+const returnpolicy="Return Policy";
+const supportpolicy="Support Policy";
+const productyoumayalsolike="Product you may also like";
+
+
 
