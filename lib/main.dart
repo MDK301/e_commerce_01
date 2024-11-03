@@ -2,7 +2,7 @@ import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+//ket noi voi node o firebase
 void main() {
   runApp(const MyApp());
 }

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "152925978886",
-    "project_id": "ecommerce-ab9d9",
-    "storage_bucket": "ecommerce-ab9d9.firebasestorage.app"
+    "project_number": "740307927813",
+    "project_id": "note-24dea",
+    "storage_bucket": "note-24dea.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:152925978886:android:aa057243de20dda9e01e87",
+        "mobilesdk_app_id": "1:740307927813:android:db3de8079cd06982c36d6c",
         "android_client_info": {
           "package_name": "com.example.e_commerce"
         }
@@ -15,7 +15,45 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCahAsFFzkSid5h1rVffWMg7qwzHMOz9ng"
+          "current_key": "AIzaSyAqTXTEy-4wtiqGZOZ6gHfyYOBztXKTn34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740307927813:android:41587d7d7e4f875ec36d6c",
+        "android_client_info": {
+          "package_name": "com.example.nghenhac"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqTXTEy-4wtiqGZOZ6gHfyYOBztXKTn34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740307927813:android:7f9c4cb3f56d86fec36d6c",
+        "android_client_info": {
+          "package_name": "com.example.testfirebaseno1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqTXTEy-4wtiqGZOZ6gHfyYOBztXKTn34"
         }
       ],
       "services": {
