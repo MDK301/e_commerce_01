@@ -59,8 +59,8 @@ android {
 flutter {
     source = "../.."
 }
-android{
-    defaultConfig{
+android {
+    defaultConfig {
         minSdkVersion 23
     }
 }

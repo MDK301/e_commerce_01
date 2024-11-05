@@ -13,83 +13,100 @@ class ProfileScreen extends StatelessWidget {
     return BgWidget(
         child: Scaffold(
       body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            //edit profile button
-            const Align(
-              alignment: Alignment.topRight,
-              child: Icon(
-                Icons.edit,
-                color: whiteColor,
-              ),
-            ).onTap(() {}),
-
-            //user detail profile
-            Row(
-              children: [
-                Image.asset(
-                  imgProfile,
-                  width: 120,
-                  fit: BoxFit.cover,
-                ).box.roundedFull.clip(Clip.antiAlias).make(),
-                10.widthBox,
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    "Dummy User".text.fontFamily(semibold).white.make(),
-                    "Customer@example.com".text.white.make(),
-                  ],
-                )),
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
+          child: Column(
+            children: [
+              //edit profile button
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Align(
+                  alignment: Alignment.topRight,
+                  child: Icon(
+                    Icons.edit,
                     color: whiteColor,
-                  )),
-                  onPressed: () {},
-                  child: logout.text.fontFamily(semibold).make(),
-                )
-              ],
-            ),
-            20.heightBox,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                DetailCard(
-                    count: "00",
-                    title: "in your cart",
-                    width: context.screenWidth / 3.4),
-                DetailCard(
-                    count: "32",
-                    title: "in your wishlist",
-                    width: context.screenWidth / 3.4),
-                DetailCard(
-                    count: "67",
-                    title: "your orders",
-                    width: context.screenWidth / 3.4),
-              ],
-            ),
+                  ),
+                ).onTap(() {}),
+              ),
 
-            //Button section
-            40.heightBox,
-            ListView.separated(
-              shrinkWrap: true,
+              //user detail profile
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      imgProfile,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    ).box.roundedFull.clip(Clip.antiAlias).make(),
+                    10.widthBox,
+                    Expanded(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        "Dummy User".text.fontFamily(semibold).white.make(),
+                        "Customer@example.com".text.white.make(),
+                      ],
+                    )),
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          side: const BorderSide(
+                        color: whiteColor,
+                      )),
+                      onPressed: () {},
+                      child: logout.text.fontFamily(semibold).make(),
+                    )
+                  ],
+                ),
+              ),
+              20.heightBox,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DetailCard(
+                      count: "00",
+                      title: "in your cart",
+                      width: context.screenWidth / 3.4),
+                  DetailCard(
+                      count: "32",
+                      title: "in your wishlist",
+                      width: context.screenWidth / 3.4),
+                  DetailCard(
+                      count: "67",
+                      title: "your orders",
+                      width: context.screenWidth / 3.4),
+                ],
+              ),
+
+              //Button section
+              ListView.separated(
+                shrinkWrap: true,
                 separatorBuilder: (context, index) {
-                  return const Divider(color: lightGrey,);
+                  return const Divider(
+                    color: lightGrey,
+                  );
                 },
                 itemCount: profileButtonList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: Image.asset(profileButtonIcons[index]),
-                    title: profileButtonList[index].text.make(),
+                    leading: Image.asset(
+                      profileButtonIcons[index],
+                      width: 22,
+                    ),
+                    title: profileButtonList[index]
+                        .text
+                        .fontFamily(semibold)
+                        .color(darkFontGrey)
+                        .make(),
                   );
                 },
-            ).box.white.rounded.padding(const EdgeInsets.symmetric(horizontal: 16)).shadowSm.make(),
-          ],
-        ),
-      )),
+              )
+                  .box
+                  .white
+                  .rounded.margin(EdgeInsets.all(12))
+                  .padding(const EdgeInsets.symmetric(horizontal: 16))
+                  .shadowSm
+                  .make().box.color(redColor).make(),
+            ],
+          )),
     ));
   }
 }
