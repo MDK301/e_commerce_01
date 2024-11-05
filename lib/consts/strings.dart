@@ -10,6 +10,7 @@ const name = "Name";
 const namehint = "Name hint";
 const forgetPass="Forget Password";
 const login = "Log in";
+const logout = "Log out";
 const signup = "Sign up";
 const createNewAccount = "or, create a new account";
 const loginWith = "Log in With";
@@ -55,5 +56,8 @@ const returnpolicy="Return Policy";
 const supportpolicy="Support Policy";
 const productyoumayalsolike="Product you may also like";
 
-
+//profile
+const mywishlist="My Wish Lish";
+const myorder="My Order";
+const messages="Messages";
 
