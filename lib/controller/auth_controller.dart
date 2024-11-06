@@ -7,9 +7,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
+
+
   //login menthod
   Future<UserCredential?> loginMenthod({email, password, context}) async {
     UserCredential? userCredential;
+
     try {
       userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -29,7 +32,7 @@ class AuthController extends GetxController {
     return userCredential;
   }
 
-  //starting data menthod
+  //storting data menthod
 storeUserData({name,password,email})async{
     DocumentReference store =await firestore.collection(usersCollection).doc(currentUser!.uid);
     store.set({

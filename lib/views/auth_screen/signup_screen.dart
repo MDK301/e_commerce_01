@@ -1,5 +1,7 @@
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
+import 'package:e_commerce/controller/auth_controller.dart';
+import 'package:e_commerce/views/home_screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +18,14 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  bool? isCheck=false;
+  bool? isCheck = false;
+  var controller = Get.put(AuthController());
+
+  //text Controller
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var repasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +42,20 @@ class _SignupScreenState extends State<SignupScreen> {
               15.heightBox,
               Column(
                 children: [
-                  customTextField(hint: namehint, title: name),
-                  customTextField(hint: emailhint, title: email),
-                  customTextField(hint: passwordhint, title: password),
-                  customTextField(hint: passwordhint, title: retypepassword),
+                  customTextField(
+                      hint: namehint, title: name, controller: nameController,isPass: false),
+                  customTextField(
+                      hint: emailhint,
+                      title: email,
+                      controller: emailController,isPass: false),
+                  customTextField(
+                      hint: passwordhint,
+                      title: password,
+                      controller: passwordController,isPass: true),
+                  customTextField(
+                      hint: passwordhint,
+                      title: retypepassword,
+                      controller: repasswordController,isPass: true),
                   Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -49,8 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         value: isCheck,
                         onChanged: (newValue) {
                           setState(() {
-                            isCheck=newValue;
-
+                            isCheck = newValue;
                           });
                         },
                       ),
@@ -81,10 +99,35 @@ class _SignupScreenState extends State<SignupScreen> {
                   15.heightBox,
                   // ourButton().box.width(context.screenWidth - 50).make(),
                   ourButton(
-                    color: redColor,
-                    textColor: whiteColor,
+                    color: isCheck == true ? redColor : lightGrey,
                     title: signup,
-                    onPress: () {},
+                    textColor: whiteColor,
+                    onPress: () async {
+                      if (isCheck != false) {
+                        try {
+                          await controller
+                              .signupMenthod(
+                            context: context,
+                            email: emailController.text,
+                            password: passwordController.text,
+                          )
+                              .then((value) {
+                            return controller.storeUserData(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              name: nameController.text,
+                            );
+                          }).then((value){
+                            VxToast.show(context, msg: loggedin);
+                            Get.offAll(()=>Home());
+                          });
+                        } catch (e) {
+                          auth.signOut();
+                          VxToast.show(context, msg: e.toString());
+                          print(e);
+                        }
+                      }
+                    },
                   ).box.width(context.screenWidth - 50).make(),
                   10.heightBox,
                   //warping into gesture detecor of Velocity X
@@ -92,27 +135,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       alreadyhaveanaccount.text.color(fontGrey).make(),
-                      login.text.color(redColor).make().onTap((){
+                      login.text.color(redColor).make().onTap(() {
                         Get.back();
                       })
                     ],
                   )
-                  // RichText(
-                  //   text: const TextSpan(
-                  //     children: [
-                  //       TextSpan(
-                  //         text: alreadyhaveanaccount,
-                  //         style: TextStyle(fontFamily: bold, color: fontGrey),
-                  //       ),
-                  //       TextSpan(
-                  //         text: login,
-                  //         style: TextStyle(fontFamily: bold, color: redColor),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ).onTap((){
-                  //   Get.back();
-                  // })
                 ],
               )
                   .box

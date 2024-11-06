@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
+import 'package:e_commerce/controller/auth_controller.dart';
 import 'package:e_commerce/views/auth_screen/signup_screen.dart';
 import 'package:e_commerce/views/home_screen/home.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AuthController());
     return BgWidget(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -29,8 +31,8 @@ class LoginScreen extends StatelessWidget {
               15.heightBox,
               Column(
                 children: [
-                  customTextField(hint: emailhint, title: email),
-                  customTextField(hint: passwordhint, title: password),
+                  customTextField(hint: emailhint, title: email,isPass: false),
+                  customTextField(hint: passwordhint, title: password,isPass: true),
                   Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
