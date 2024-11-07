@@ -1,5 +1,7 @@
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/views/auth_screen/login_screen.dart';
+import 'package:e_commerce/views/home_screen/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +17,18 @@ class _SplashScreenState extends State<SplashScreen> {
   changeScreen() {
     //dùng GetX chỗ nii nì
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(() => const LoginScreen());
+      // Get.to(() => const LoginScreen());
+
+      //thay bằng auth nì
+      auth.authStateChanges().listen((User? user){
+        if (user ==null && mounted){
+          Get.to(()=>const LoginScreen());
+        }else{
+          Get.to(()=>const Home());
+        }
+      });
+
+
     });
   }
 

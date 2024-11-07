@@ -2,6 +2,7 @@ import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/controller/auth_controller.dart';
 import 'package:e_commerce/views/auth_screen/login_screen.dart';
 import 'package:e_commerce/views/profile_screen/components/detail_card.dart';
+import 'package:e_commerce/views/profile_screen/edit_profile_screen.dart';
 import 'package:e_commerce/views/widgets_common/bg_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,9 @@ class ProfileScreen extends StatelessWidget {
                     Icons.edit,
                     color: whiteColor,
                   ),
-                ).onTap(() {}),
+                ).onTap(() {
+                  Get.to(()=>const EditProfileScreen());
+                }),
               ),
 
               //user detail profile
