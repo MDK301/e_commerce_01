@@ -62,4 +62,6 @@ const productyoumayalsolike="Product you may also like";
 const mywishlist="My Wish Lish";
 const myorder="My Order";
 const messages="Messages";
+const oldpassword = "Old password";
+const newpassword = "New password";
 

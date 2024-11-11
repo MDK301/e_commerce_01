@@ -74,6 +74,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/icons/bg.png
+    - lib/services/category_model.json
 
 
 
