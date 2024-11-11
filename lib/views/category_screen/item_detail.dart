@@ -10,6 +10,10 @@ class ItemDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // lấy so mau =)))
+    //print(Colors.black.value);
+
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
