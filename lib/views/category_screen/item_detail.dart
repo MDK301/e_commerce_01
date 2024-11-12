@@ -41,19 +41,26 @@ class ItemDetail extends StatelessWidget {
                 icon: const Icon(
                   Icons.share,
                 )),
-            IconButton(
-                onPressed: () {
-                  if(controller.isFav.value){
-                    controller.removeFromWishlist(data.id);
-                    controller.isFav(false);
-                  }else{
-                    controller.addToWishlist(data.id);
-                    controller.isFav(true);
-                  }
-                },
-                icon: const Icon(
-                  Icons.favorite_outline,
-                )),
+            Obx(
+              () => IconButton(
+                  onPressed: () {
+
+                    if (controller.isFav.value) {
+                      controller.removeFromWishlist(data.id,context);
+                    } else {
+                      controller.addToWishlist(data.id,context);
+                    }
+
+                  },
+                  icon:controller.isFav.value ? const Icon(
+                    Icons.favorite_outlined,
+                    color:  redColor ,
+                  ) :const Icon(
+                    Icons.favorite_outline,
+                    color:  darkFontGrey ,
+                  )
+              ),
+            ),
           ],
         ),
         body: Column(
@@ -136,7 +143,7 @@ class ItemDetail extends StatelessWidget {
                           ).onTap(() {
                             Get.to(
                               () => const ChatScreen(),
-                              arguments: [data['p_seller'],data['vendor_id']],
+                              arguments: [data['p_seller'], data['vendor_id']],
                             );
                           }),
                         ],
@@ -348,15 +355,19 @@ class ItemDetail extends StatelessWidget {
               child: ourButton(
                   color: redColor,
                   onPress: () {
-                    controller.addToCart(
-                        color: data['p_colors'][controller.colorIndex.value],
-                        context: context,
-                        img: data['p_imgs'][0],
-                        qty: controller.quantity.value,
-                        sellername: data['p_seller'],
-                        title: data['p_name'],
-                        tprice: controller.totalPrice.value);
-                    VxToast.show(context, msg: "Added to cart");
+                    if(  controller.totalPrice.value>0 ){
+                      controller.addToCart(
+                          color: data['p_colors'][controller.colorIndex.value],
+                          context: context,
+                          img: data['p_imgs'][0],
+                          qty: controller.quantity.value,
+                          sellername: data['p_seller'],
+                          title: data['p_name'],
+                          tprice: controller.totalPrice.value);
+                      VxToast.show(context, msg: "Added to cart");
+                    }
+
+
                   },
                   textColor: whiteColor,
                   title: "Add to cart"),

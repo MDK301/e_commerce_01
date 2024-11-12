@@ -65,3 +65,9 @@ const messages="Messages";
 const oldpassword = "Old password";
 const newpassword = "New password";
 
+//ppthanhtoan
+
+const paypal="Paypal";
+const stripe="Stripe";
+const cod="Cash on delivery";
+

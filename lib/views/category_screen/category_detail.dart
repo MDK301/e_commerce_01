@@ -27,17 +27,16 @@ class CategoryDetail extends StatelessWidget {
               stream: FirestoreServices.getProducts(title),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                if(!snapshot.hasData){
+                if (!snapshot.hasData) {
                   return Center(
                     child: loadingIndicator(),
                   );
-                }else if(snapshot.data!.docs.isEmpty){
+                } else if (snapshot.data!.docs.isEmpty) {
                   return Center(
                     child: "No products found!".text.color(darkFontGrey).make(),
                   );
-                }else{
-
-                  var data=snapshot.data!.docs;
+                } else {
+                  var data = snapshot.data!.docs;
                   return Container(
                     padding: EdgeInsets.all(12),
                     child: Column(
@@ -49,7 +48,7 @@ class CategoryDetail extends StatelessWidget {
                           child: Row(
                             children: List.generate(
                                 controller.subcat.length,
-                                    (index) => "${controller.subcat[index]}"
+                                (index) => "${controller.subcat[index]}"
                                     .text
                                     .size(12)
                                     .fontFamily(semibold)
@@ -73,13 +72,14 @@ class CategoryDetail extends StatelessWidget {
                                 shrinkWrap: true,
                                 itemCount: data.length,
                                 gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisExtent: 250,
-                                    mainAxisSpacing: 8),
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisExtent: 250,
+                                        mainAxisSpacing: 8),
                                 itemBuilder: (context, index) {
                                   return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Image.network(
                                         data[index]['p_imgs'][0],
@@ -93,7 +93,8 @@ class CategoryDetail extends StatelessWidget {
                                           .color(darkFontGrey)
                                           .make(),
                                       10.heightBox,
-                                      "${data[index]['p_price']}".numCurrency
+                                      "${data[index]['p_price']}"
+                                          .numCurrency
                                           .text
                                           .color(redColor)
                                           .fontFamily(bold)
@@ -103,12 +104,20 @@ class CategoryDetail extends StatelessWidget {
                                   )
                                       .box
                                       .white
-                                      .margin(const EdgeInsets.symmetric(horizontal: 4))
+                                      .margin(const EdgeInsets.symmetric(
+                                          horizontal: 4))
                                       .roundedSM
                                       .outerShadowSm
                                       .padding(EdgeInsets.all(8))
-                                      .make().onTap((){
-                                    Get.to(()=>ItemDetail(title: "${data[index]['p_name']}",data: data[index],),);
+                                      .make()
+                                      .onTap(() {
+                                        controller.checkIfFav(data[index]);
+                                    Get.to(
+                                      () => ItemDetail(
+                                        title: "${data[index]['p_name']}",
+                                        data: data[index],
+                                      ),
+                                    );
                                   });
                                 }))
                       ],
