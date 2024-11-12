@@ -34,9 +34,12 @@ class ChatScreen extends StatelessWidget {
                               controller.chatDocId.toString()),
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
+
+                            //??????? mắc gì không có dòng in này thì khơng chịu load tin nhắn ???
+                            print( controller.chatDocId.toString());
                             if (!snapshot.hasData) {
-                              print("snapshot");
-                              print(snapshot.data!.docs);
+                              // print("snapshot");
+                              // print(snapshot.data!.docs);
                               return Center(
                                 child: loadingIndicator(),
                               );
@@ -49,9 +52,9 @@ class ChatScreen extends StatelessWidget {
                               );
                             } else {
                               return ListView(
-                                children: [
-                                  senderBubble(),
-                                ],
+                                children: snapshot.data!.docs.mapIndexed((currentUser,index){
+                                  return senderBubble();
+                                }).toList(),
                               );
                             }
                           })),
