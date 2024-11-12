@@ -24,37 +24,46 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           children: [
             Obx(
-              () => controller.isLoading.value
+                  () =>
+              controller.isLoading.value
                   ? Center(
-                      child: loadingIndicator(),
-                    )
+                child: loadingIndicator(),
+              )
                   : Expanded(
-                      child: StreamBuilder(
-                          stream: FirestoreServices.getChatMessages(
-                              controller.chatDocId.toString()),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (!snapshot.hasData) {
-                              print("snapshot");
-                              print(snapshot.data!.docs);
-                              return Center(
-                                child: loadingIndicator(),
-                              );
-                            } else if (snapshot.data!.docs.isEmpty) {
-                              return Center(
-                                child: "Send a messenger..."
-                                    .text
-                                    .color(darkFontGrey)
-                                    .make(),
-                              );
-                            } else {
-                              return ListView(
-                                children: [
-                                  senderBubble(),
-                                ],
-                              );
-                            }
-                          })),
+                  child: StreamBuilder(
+                      stream: FirestoreServices.getChatMessages(
+                          controller.chatDocId.toString()),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        //??????? mắc gì không có dòng in này thì khơng chịu load tin nhắn ???
+                        // print( controller.chatDocId.toString());
+                        if (!snapshot.hasData) {
+                          // print("snapshot");
+                          // print(snapshot.data!.docs);
+                          return Center(
+                            child: loadingIndicator(),
+                          );
+                        } else if (snapshot.data!.docs.isEmpty) {
+                          return Center(
+                            child: "Send a messenger..."
+                                .text
+                                .color(darkFontGrey)
+                                .make(),
+                          );
+                        } else {
+                          return ListView(
+                            children: snapshot.data!.docs.mapIndexed((
+                                currentValue, index) {
+                              var data = snapshot.data!.docs[index];
+
+                              return Align(
+                                  alignment: data['uid'] == currentUser!.uid
+                                      ? Alignment.centerRight : Alignment.centerLeft,
+                                  child: senderBubble(data));
+                            }).toList(),
+                          );
+                        }
+                      })),
             ),
             10.heightBox,
             Row(

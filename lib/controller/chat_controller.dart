@@ -47,6 +47,7 @@ class ChatsController extends GetxController {
             });
           }
         });
+    isLoading(false);
   }
   sendMsg (String msg)async{
     if(msg.trim().isNotEmpty){
