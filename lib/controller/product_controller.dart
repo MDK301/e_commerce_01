@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 
 class ProductController extends GetxController{
+  var quantity = 0.obs;
   var subcat=[];
+  var colorIndex=0.obs;
+  var totalPrice=0.obs;
 
   getSubCategories(title) async{
     subcat.clear();
@@ -15,5 +18,19 @@ class ProductController extends GetxController{
     for(var e in s[0].subcategory){
       subcat.add(e);
     }
+  }
+  changeColorIndex(index){
+    colorIndex.value=index;
+  }
+  increaseQuantity(totalQuantity){
+    if(quantity.value<totalQuantity){
+    quantity.value++;}
+  }
+  decreaseQuantity(){
+    if(quantity.value >0){
+    quantity.value--;}
+  }
+  calculateTotalPrice(price){
+    totalPrice.value=price*quantity.value;
   }
 }
