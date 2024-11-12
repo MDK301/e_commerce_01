@@ -21,6 +21,8 @@ class ChatsController extends GetxController {
   var msgController = TextEditingController();
   dynamic chatDocId;
 
+  var isLoading=false.obs;
+
   getChatId() async {
     await chats
         .where('users', isEqualTo: {friendId: null, currentId: null})

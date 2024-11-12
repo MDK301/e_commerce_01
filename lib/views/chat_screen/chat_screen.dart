@@ -23,25 +23,39 @@ class ChatScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Expanded(
-                child: StreamBuilder(stream: FirestoreServices.getChatMessages(controller.chatDocId.toString()),
-                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                     if(snapshot.hasData){
-                       return Center(
-                         child: loadingIndicator(),
-                       );
-                     }else if(snapshot.data!.docs.isEmpty){
-                       return Center(
-                         child: "Send a messenger...".text.color(darkFontGrey).make(),
-                       );
-                     }else{
-                       return ListView(
-                         children: [
-                           senderBubble(),
-                         ],
-                       );
-                     }
-                    })),
+            Obx(
+              () => controller.isLoading.value
+                  ? Center(
+                      child: loadingIndicator(),
+                    )
+                  : Expanded(
+                      child: StreamBuilder(
+                          stream: FirestoreServices.getChatMessages(
+                              controller.chatDocId.toString()),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (!snapshot.hasData) {
+                              print("snapshot");
+                              print(snapshot.data!.docs);
+                              return Center(
+                                child: loadingIndicator(),
+                              );
+                            } else if (snapshot.data!.docs.isEmpty) {
+                              return Center(
+                                child: "Send a messenger..."
+                                    .text
+                                    .color(darkFontGrey)
+                                    .make(),
+                              );
+                            } else {
+                              return ListView(
+                                children: [
+                                  senderBubble(),
+                                ],
+                              );
+                            }
+                          })),
+            ),
             10.heightBox,
             Row(
               children: [
