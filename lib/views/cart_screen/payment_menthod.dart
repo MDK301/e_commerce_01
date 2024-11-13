@@ -10,14 +10,18 @@ class PaymentMenthod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller=Get.find<CartController>();
+    var controller = Get.find<CartController>();
 
     return Scaffold(
       backgroundColor: whiteColor,
       bottomNavigationBar: SizedBox(
         height: 60,
         child: ourButton(
-            onPress: () {},
+            onPress: () {
+              controller.placeMyOrder(
+                  totalAmount: controller.totalP.value,
+                  orderPaymentMethod: paymentMenthods[controller.paymentIndex.value]);
+            },
             color: redColor,
             textColor: whiteColor,
             title: "Place my order"),
@@ -31,37 +35,64 @@ class PaymentMenthod extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: Column(
-          children: List.generate(paymentMenthods.length, (index) {
-            return Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      style: BorderStyle.solid, color: redColor, width: 4)),
-              margin: const EdgeInsets.only(bottom: 8),
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-
-                  Image.asset(
-                    paymentMenthodsImg[index],
-                    width: double.infinity,
-                    height: 120,
-                    fit: BoxFit.cover,
+        child: Obx(
+          () => Column(
+            children: List.generate(paymentMenthods.length, (index) {
+              return GestureDetector(
+                onTap: () {
+                  controller.paymentIndex(index);
+                },
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: controller.paymentIndex.value == index
+                              ? redColor
+                              : Colors.transparent,
+                          width: 4)),
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      Image.asset(
+                        paymentMenthodsImg[index],
+                        width: double.infinity,
+                        height: 120,
+                        fit: BoxFit.cover,
+                        colorBlendMode: controller.paymentIndex.value == index
+                            ? BlendMode.darken
+                            : BlendMode.color,
+                        color: controller.paymentIndex.value == index
+                            ? Colors.black.withOpacity(0.4)
+                            : Colors.transparent,
+                      ),
+                      controller.paymentIndex.value == index
+                          ? Transform.scale(
+                              scale: 1.3,
+                              child: Checkbox(
+                                  activeColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  value: true,
+                                  onChanged: (value) {}),
+                            )
+                          : Container(),
+                      Positioned(
+                        child: paymentMenthods[index]
+                            .text
+                            .white
+                            .fontFamily(bold)
+                            .size(16)
+                            .make(),
+                        bottom: 10,
+                        right: 10,
+                      )
+                    ],
                   ),
-                  Transform.scale(
-                    scale: 1.3,
-                    child: Checkbox(
-                      activeColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        value: true,
-                        onChanged: (value) {}),
-                  )
-                ],
-              ),
-            );
-          }),
+                ),
+              );
+            }),
+          ),
         ),
       ),
     );
