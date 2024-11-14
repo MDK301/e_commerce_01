@@ -20,7 +20,7 @@ class CartScreen extends StatelessWidget {
           child: ourButton(
               color: redColor,
               onPress: () {
-                Get.to(()=>const ShippingDetails());
+                Get.to(() => const ShippingDetails());
               },
               textColor: whiteColor,
               title: "Proceed to shipping"),
@@ -48,7 +48,7 @@ class CartScreen extends StatelessWidget {
               } else {
                 var data = snapshot.data!.docs;
                 controller.calculate(data);
-                controller.productSnapshot=data;
+                controller.productSnapshot = data;
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -60,13 +60,17 @@ class CartScreen extends StatelessWidget {
                               itemCount: data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return ListTile(
-                                  leading:
-                                      Image.network("${data[index]['img']}"),
-                                  title: "${data[index]['title']} (x ${data[index]['qty']})"
-                                      .text
-                                      .fontFamily(semibold)
-                                      .size(16)
-                                      .make(),
+                                  leading: Image.network(
+                                    "${data[index]['img']}",
+                                    width: 80,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  title:
+                                      "${data[index]['title']} (x ${data[index]['qty']})"
+                                          .text
+                                          .fontFamily(semibold)
+                                          .size(16)
+                                          .make(),
                                   subtitle: "${data[index]['tprice']}"
                                       .numCurrency
                                       .text

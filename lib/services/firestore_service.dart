@@ -30,13 +30,37 @@ class FirestoreServices {
     return firestore.collection(cartCollection).doc(docId).delete();
   }
 
-//lay toan bo tin nhan
+  //lay toan bo tin nhan
   static getChatMessages(docId) {
     return firestore
         .collection(chatsCollection)
         .doc(docId)
         .collection(messagesCollection)
-        .orderBy('created_on',descending: false)
+        .orderBy('created_on', descending: false)
+        .snapshots();
+  }
+
+  //gom order =)))
+  static getAllOrders() {
+    return firestore
+        .collection(ordersCollection)
+        .where('order_by', isEqualTo: currentUser!.uid)
+        .snapshots();
+  }
+
+  //gom wishlist =)))
+  static getWishlist() {
+    return firestore
+        .collection(ordersCollection)
+        .where('p_wishlist', isEqualTo: currentUser!.uid)
+        .snapshots();
+  }
+
+  //lay toan bo tin nhan
+  static getAllMessages() {
+    return firestore
+        .collection(chatsCollection)
+        .where('fromId',isEqualTo: currentUser!.uid)
         .snapshots();
   }
 }

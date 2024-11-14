@@ -4,18 +4,18 @@ import 'package:e_commerce/views/splash_screen/loading_indicator.dart';
 
 import '../../consts/consts.dart';
 
-class MessagesScreen extends StatelessWidget {
-  const MessagesScreen({super.key});
+class WishlistScreen extends StatelessWidget {
+  const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
-        title: "My Messages".text.color(darkFontGrey).fontFamily(semibold).make(),
+        title: "My Wishlist".text.color(darkFontGrey).fontFamily(semibold).make(),
       ),
       body: StreamBuilder(
-          stream: FirestoreServices.getAllMessages() ,
+          stream: FirestoreServices.getWishlist() ,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {

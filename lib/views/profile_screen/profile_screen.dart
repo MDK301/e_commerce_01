@@ -4,9 +4,12 @@ import 'package:e_commerce/controller/auth_controller.dart';
 import 'package:e_commerce/controller/profile_controller.dart';
 import 'package:e_commerce/services/firestore_service.dart';
 import 'package:e_commerce/views/auth_screen/login_screen.dart';
+import 'package:e_commerce/views/chat_screen/messaging_screen.dart';
+import 'package:e_commerce/views/orders_screen/orders_screen.dart';
 import 'package:e_commerce/views/profile_screen/components/detail_card.dart';
 import 'package:e_commerce/views/profile_screen/edit_profile_screen.dart';
 import 'package:e_commerce/views/widgets_common/bg_widget.dart';
+import 'package:e_commerce/views/wishlist_screen/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +28,8 @@ class ProfileScreen extends StatelessWidget {
           stream: FirestoreServices.getUser(currentUser!.uid),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            // print('p1');
+            //     print(snapshot.data!.docs);
             if (!snapshot.hasData) {
               return Center(
                 child: CircularProgressIndicator(
@@ -32,8 +37,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             } else {
+              // print('p2');
+              // print(snapshot.data!.docs);
               var data =snapshot.data!.docs[0];
-
+//               print("data: ");
+//               print(data);
+// return Container(child: IconButton(onPressed: (){print(snapshot.data!.docs);}, icon: Icon(Icons.link)),);
               return SafeArea(
                 child: Column(
                   children: [
@@ -131,6 +140,19 @@ class ProfileScreen extends StatelessWidget {
                       itemCount: profileButtonList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
+                          onTap: (){
+                            switch (index){
+                              case 0:
+                                Get.to(()=>const OrdersScreen());
+                                break;
+                              case 1:
+                                Get.to(()=>const WishlistScreen());
+                                break;
+                              case 2:
+                                Get.to(()=>const MessagesScreen());
+                                break;
+                            }
+                          },
                           leading: Image.asset(
                             profileButtonIcons[index],
                             width: 22,
