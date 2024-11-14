@@ -355,7 +355,7 @@ class ItemDetail extends StatelessWidget {
               child: ourButton(
                   color: redColor,
                   onPress: () {
-                    if(  controller.totalPrice.value>0 ){
+                    if(  controller.quantity.value>0 ){
                       controller.addToCart(
                           color: data['p_colors'][controller.colorIndex.value],
                           context: context,

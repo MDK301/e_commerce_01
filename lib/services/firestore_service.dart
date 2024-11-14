@@ -25,7 +25,7 @@ class FirestoreServices {
         .snapshots();
   }
 
-//delete hàng
+//delete hàng trong gio
   static deleteDocument(docId) {
     return firestore.collection(cartCollection).doc(docId).delete();
   }
@@ -48,19 +48,21 @@ class FirestoreServices {
         .snapshots();
   }
 
-  //gom wishlist =)))
   static getWishlist() {
+    print("currentUser!.uid${currentUser!.uid}");
     return firestore
-        .collection(ordersCollection)
-        .where('p_wishlist', isEqualTo: currentUser!.uid)
+        .collection(productsCollection)
+        .where('p_wishlist', arrayContains: currentUser!.uid)
         .snapshots();
   }
 
   //lay toan bo tin nhan
   static getAllMessages() {
+
     return firestore
         .collection(chatsCollection)
-        .where('fromId',isEqualTo: currentUser!.uid)
+        .where("fromId", isEqualTo: "currentUser!.uid")
         .snapshots();
+
   }
 }

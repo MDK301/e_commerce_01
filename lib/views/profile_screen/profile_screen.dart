@@ -103,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
                             onPressed: () async {
                               await Get.put(AuthController())
                                   .signoutMenthod(context);
-                              Get.offAll(() => const LoginScreen());
+                              Get.offAll(() =>  LoginScreen());
                             },
                             child: logout.text.fontFamily(semibold).make(),
                           )
