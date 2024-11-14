@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/services/firestore_service.dart';
+import 'package:e_commerce/views/orders_screen/orders_details.dart';
 import 'package:e_commerce/views/splash_screen/loading_indicator.dart';
+import 'package:get/get.dart';
 
 import '../../consts/consts.dart';
 
@@ -49,7 +51,9 @@ class OrdersScreen extends StatelessWidget {
                           .fontFamily(bold)
                           .make(),
                       trailing: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const OrdersDetails(data: ,));
+                        },
                         icon: const Icon(Icons.arrow_forward_ios_rounded),
                         color: darkFontGrey,
                       ),
