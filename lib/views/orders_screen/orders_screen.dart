@@ -52,7 +52,7 @@ class OrdersScreen extends StatelessWidget {
                           .make(),
                       trailing: IconButton(
                         onPressed: () {
-                          Get.to(() => const OrdersDetails(data: ,));
+                          Get.to(() => OrdersDetails(data:data[index]));
                         },
                         icon: const Icon(Icons.arrow_forward_ios_rounded),
                         color: darkFontGrey,

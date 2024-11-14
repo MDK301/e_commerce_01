@@ -13,7 +13,7 @@ Widget orderStatus({icon, color, title, showDone}) {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           "$title".text.color(darkFontGrey).make(),
-          showDone()
+          showDone
               ? const Icon(
                   Icons.done,
                   color: redColor,

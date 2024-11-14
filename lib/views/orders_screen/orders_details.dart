@@ -35,7 +35,7 @@ class OrdersDetails extends StatelessWidget {
               color: Colors.yellow,
               icon: Icons.car_crash,
               title: "On Delivery",
-              showDone: data['order_on_delivery']),
+              showDone: data['order_delivery']),
           orderStatus(
               color: Colors.purple,
               icon: Icons.done_all_rounded,
