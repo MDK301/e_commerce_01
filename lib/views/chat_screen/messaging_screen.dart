@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/services/firestore_service.dart';
 import 'package:e_commerce/views/splash_screen/loading_indicator.dart';
-
+import 'package:get/get.dart';
 import '../../consts/consts.dart';
-
+import 'package:e_commerce/views/chat_screen/chat_screen.dart';
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});
 

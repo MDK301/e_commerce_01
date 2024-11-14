@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/controller/home_controller.dart';
 import 'package:get/get.dart';
-
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 class ChatsController extends GetxController {
   @override
   void onInit() {
@@ -33,6 +34,9 @@ class ChatsController extends GetxController {
             chatDocId = snapshot.docs.single.id;
           } else {
             chats.add({
+              //moi them vaorommid
+              'roomId': '',
+
               'created_on':null,
               'last_msg':'',
               'users':{friendId: null, currentId: null},
@@ -49,10 +53,13 @@ class ChatsController extends GetxController {
         });
     isLoading(false);
   }
+
+  //gui tinnhan
   sendMsg (String msg)async{
     if(msg.trim().isNotEmpty){
       chats.doc(chatDocId).update({
         'created_on':FieldValue.serverTimestamp(),
+        'roomId': chatRoomId(friendId.toString(),currentId.toString()),
         'last_msg':msg,
         'toId':friendId,
         'fromId':currentId,
@@ -63,6 +70,15 @@ class ChatsController extends GetxController {
         'uid':currentId,
       });
     }
+  }
 
+  // tao chuoi
+  String chatRoomId(String user1, String user2) {
+    List<String> users = [user1, user2];
+    users.sort(); // Sắp xếp danh sách users
+    String combined = users.join("-");
+    var bytes = utf8.encode(combined);
+    var digest = sha1.convert(bytes);
+    return digest.toString();
   }
 }

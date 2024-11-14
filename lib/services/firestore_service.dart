@@ -61,7 +61,7 @@ class FirestoreServices {
 
     return firestore
         .collection(chatsCollection)
-        .where("fromId", isEqualTo: "currentUser!.uid")
+        .where("roomId", isEqualTo: "dd73b017f9825a5c22312133bc9431e55ee474e8")
         .snapshots();
 
   }
