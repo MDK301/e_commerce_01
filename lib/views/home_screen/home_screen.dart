@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/consts/colors.dart';
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
+import 'package:e_commerce/services/firestore_service.dart';
+import 'package:e_commerce/views/splash_screen/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -222,48 +225,69 @@ class HomeScreen extends StatelessWidget {
 
                     //all product section
                     20.heightBox,
-                    GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 6,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                      mainAxisSpacing: 8,crossAxisSpacing: 8,mainAxisExtent: 300),
-                      itemBuilder: (context, index) {
-                        return Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              imgP1,
-                              width: 200,
-                              height: 200,
-                              fit: BoxFit.cover,
-                            ),
-                            const Spacer(),
-                            "Laptop 4GB/64GB"
-                                .text
-                                .fontFamily(semibold)
-                                .color(darkFontGrey)
-                                .make(),
-                            10.heightBox,
-                            "\600"
-                                .text
-                                .color(redColor)
-                                .fontFamily(bold)
-                                .size(16)
-                                .make(),
-                          ],
-                        )
-                            .box
-                            .white
-                            .margin(const EdgeInsets.symmetric(
-                            horizontal: 4))
-                            .roundedSM
-                            .padding(EdgeInsets.all(8))
-                            .make();
-                      },
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: allproduct.text
+                          .fontFamily(bold)
+                          .color(darkFontGrey)
+                          .size(18)
+                          .make(),
                     ),
+                    20.heightBox,
+                    StreamBuilder(
+                        stream: FirestoreServices.allproducts(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (!snapshot.hasData) {
+                            return loadingIndicator();
+                          } else {
+                            var allproducts=snapshot.data!.docs;
+                            return GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: allproducts.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 8,
+                                      crossAxisSpacing: 8,
+                                      mainAxisExtent: 300),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      imgP1,
+                                      width: 200,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const Spacer(),
+                                    "Laptop 4GB/64GB"
+                                        .text
+                                        .fontFamily(semibold)
+                                        .color(darkFontGrey)
+                                        .make(),
+                                    10.heightBox,
+                                    "\600"
+                                        .text
+                                        .color(redColor)
+                                        .fontFamily(bold)
+                                        .size(16)
+                                        .make(),
+                                  ],
+                                )
+                                    .box
+                                    .white
+                                    .margin(const EdgeInsets.symmetric(
+                                        horizontal: 4))
+                                    .roundedSM
+                                    .padding(EdgeInsets.all(8))
+                                    .make();
+                              },
+                            );
+                          }
+                        }),
                   ],
                 ),
               ),

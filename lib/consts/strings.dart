@@ -38,6 +38,7 @@ const mobilephone="Mobile Phone";
 const boysglasses="Boys glasses";
 const tshirts="Tshirts";
 const girlsdress="Girls Dress";
+const allproduct="All Product";
 
 //categories Strings
 const womenclothing="Women Clothing";
