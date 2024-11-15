@@ -2,7 +2,6 @@ import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
 import 'package:e_commerce/controller/product_controller.dart';
 import 'package:e_commerce/views/widgets_common/our_button.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../chat_screen/chat_screen.dart';

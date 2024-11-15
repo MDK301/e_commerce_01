@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce/consts/colors.dart';
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
 import 'package:e_commerce/services/firestore_service.dart';
+import 'package:e_commerce/views/category_screen/item_detail.dart';
 import 'package:e_commerce/views/splash_screen/loading_indicator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 
 import '../widgets_common/home_button.dart';
 import 'components/feature_button.dart';
@@ -162,41 +161,67 @@ class HomeScreen extends StatelessWidget {
                           10.heightBox,
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                  6,
-                                  (index) => Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            imgP1,
-                                            width: 150,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          10.heightBox,
-                                          "Laptop 4GB/64GB"
-                                              .text
-                                              .fontFamily(semibold)
-                                              .color(darkFontGrey)
-                                              .make(),
-                                          10.heightBox,
-                                          "\600"
-                                              .text
-                                              .color(redColor)
-                                              .fontFamily(bold)
-                                              .size(16)
-                                              .make(),
-                                        ],
-                                      )
-                                          .box
-                                          .white
-                                          .margin(const EdgeInsets.symmetric(
-                                              horizontal: 4))
-                                          .roundedSM
-                                          .padding(EdgeInsets.all(8))
-                                          .make()),
-                            ),
+                            child: FutureBuilder(
+                                future: FirestoreServices.getFeatureProduct(),
+                                builder: (context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: loadingIndicator(),
+                                    );
+                                  } else if (snapshot.data!.docs.isEmpty) {
+                                    return "No Feature products"
+                                        .text
+                                        .white
+                                        .makeCentered();
+                                  } else {
+                                    var featureData = snapshot.data!.docs;
+                                    return Row(
+                                      children: List.generate(
+                                          featureData.length,
+                                          (index) => Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Image.network(
+                                                    featureData[index]['p_imgs']
+                                                        [0],
+                                                    width: 150,
+                                                    height: 150,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  10.heightBox,
+                                                  "${featureData[index]['p_name']}"
+                                                      .text
+                                                      .fontFamily(semibold)
+                                                      .color(darkFontGrey)
+                                                      .make(),
+                                                  10.heightBox,
+                                                  "${featureData[index]['p_price']}"
+                                                      .numCurrency
+                                                      .text
+                                                      .color(redColor)
+                                                      .fontFamily(bold)
+                                                      .size(16)
+                                                      .make(),
+                                                ],
+                                              )
+                                                  .box
+                                                  .white
+                                                  .margin(const EdgeInsets
+                                                      .symmetric(horizontal: 4))
+                                                  .roundedSM
+                                                  .padding(EdgeInsets.all(8))
+                                                  .make() .onTap(() {
+                                            Get.to(() => ItemDetail(
+                                              title:
+                                              "${featureData[index]['p_name']}",
+                                              data: featureData[index],
+                                            ));
+                                          })),
+                                    );
+                                  }
+                                }),
                           ),
                         ],
                       ),
@@ -236,16 +261,16 @@ class HomeScreen extends StatelessWidget {
                     20.heightBox,
                     StreamBuilder(
                         stream: FirestoreServices.allproducts(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (!snapshot.hasData) {
                             return loadingIndicator();
                           } else {
-                            var allproducts=snapshot.data!.docs;
+                            var allproductsdata = snapshot.data!.docs;
                             return GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: allproducts.length,
+                              itemCount: allproductsdata.length,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
@@ -256,20 +281,20 @@ class HomeScreen extends StatelessWidget {
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.asset(
-                                      imgP1,
+                                    Image.network(
+                                      allproductsdata[index]['p_imgs'][0],
                                       width: 200,
                                       height: 200,
                                       fit: BoxFit.cover,
                                     ),
                                     const Spacer(),
-                                    "Laptop 4GB/64GB"
+                                    "${allproductsdata[index]['p_name']}"
                                         .text
                                         .fontFamily(semibold)
                                         .color(darkFontGrey)
                                         .make(),
                                     10.heightBox,
-                                    "\600"
+                                    "${allproductsdata[index]['p_price']}"
                                         .text
                                         .color(redColor)
                                         .fontFamily(bold)
@@ -283,7 +308,14 @@ class HomeScreen extends StatelessWidget {
                                         horizontal: 4))
                                     .roundedSM
                                     .padding(EdgeInsets.all(8))
-                                    .make();
+                                    .make()
+                                    .onTap(() {
+                                  Get.to(() => ItemDetail(
+                                        title:
+                                            "${allproductsdata[index]['p_name']}",
+                                        data: allproductsdata[index],
+                                      ));
+                                });
                               },
                             );
                           }
