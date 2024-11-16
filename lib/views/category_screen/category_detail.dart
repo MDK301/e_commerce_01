@@ -21,7 +21,6 @@ class CategoryDetail extends StatefulWidget {
 class _CategoryDetailState extends State<CategoryDetail> {
   @override
   void initState() {
-    // TODO: implement initState
 switchCategory(widget.title);
     super.initState();
   }
