@@ -17,7 +17,7 @@ class ItemDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     // lấy so mau =)))
     //print(Colors.black.value);
-    var controller = Get.find<ProductController>();
+    var controller = Get.put(ProductController());
 
     return WillPopScope(
       onWillPop: () async {

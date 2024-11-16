@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/consts/consts.dart';
 import 'package:e_commerce/consts/lists.dart';
+import 'package:e_commerce/controller/home_controller.dart';
 import 'package:e_commerce/services/firestore_service.dart';
 import 'package:e_commerce/views/category_screen/item_detail.dart';
+import 'package:e_commerce/views/home_screen/search_screen.dart';
 import 'package:e_commerce/views/splash_screen/loading_indicator.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +16,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller =Get.find<HomeController>();
+
+
     return Container(
       padding: const EdgeInsets.all(12),
       color: lightGrey,
@@ -27,9 +32,15 @@ class HomeScreen extends StatelessWidget {
               height: 60,
               color: lightGrey,
               child: TextFormField(
+                controller: controller.searchController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  suffixIcon: Icon(Icons.search),
+                  suffixIcon: Icon(Icons.search).onTap((){
+                    if(controller.searchController.text.isNotEmptyAndNotNull){
+                      Get.to(()=> SearchScreen(title: controller.searchController.text,));
+                    }
+
+                  }),
                   filled: true,
                   fillColor: whiteColor,
                   hintText: searchanything,
@@ -271,7 +282,7 @@ class HomeScreen extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: allproductsdata.length,
-                              gridDelegate:
+                              gridDelegate: const
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       mainAxisSpacing: 8,
